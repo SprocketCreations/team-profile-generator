@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
 
-Creates an HTML landing page  featuring your employees, by asking questions about them.
+Creates an HTML landing page featuring your employees, by asking you questions about them.
 
 ## Table of Contents
 
@@ -21,11 +21,11 @@ Run `node index.js` and answer the prompts. You will be allowed to add as many e
 
 ## License
 
-This project is licensed under The MIT License
+This project is licensed under The MIT License.
 
 ## Tests
 
-Install the dev dependencies and run `npm test`.
+Run `npm test`.
 
 ## Questions
 
