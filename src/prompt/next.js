@@ -19,7 +19,7 @@ const prompt = async () => {
 				short: "Intern",
 				value: "intern",
 			}, {
-				name: "Quit",
+				name: "Finish",
 				value: "quit",
 			},
 		],
