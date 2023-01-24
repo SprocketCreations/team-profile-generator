@@ -1,5 +1,5 @@
-const Employee = require("../src/Employee");
-const Engineer = require("../src/Engineer");
+const Employee = require("../lib/Employee");
+const Engineer = require("../lib/Engineer");
 
 describe("Engineer", () => {
 	describe("Initialization", () => {

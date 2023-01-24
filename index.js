@@ -1,9 +1,9 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const Manager = require("./src/Manager");
-const Intern = require("./src/Intern");
-const Engineer = require("./src/Engineer");
+const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
 
 /**
  * Uses Inquirer to prompt the user for information about a project manager.
