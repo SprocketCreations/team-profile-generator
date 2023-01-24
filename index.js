@@ -1,38 +1,53 @@
-const inquirer = require("inquirer");
-const fs = require("fs");
 
-const Manager = require("./lib/Manager");
-const Intern = require("./lib/Intern");
-const Engineer = require("./lib/Engineer");
+const makeTeamPage = require("./src/makeTeamPage");
 
-/**
- * Uses Inquirer to prompt the user for information about a project manager.
- * @returns {Manager} a new manager instance.
- */
-const promptForManager = async () => {
-	//Add team manager
-	const {name, id, email, officeNumber} = await inquirer.prompt([
-		{
-			type: "input",
-			name: "name",
-			message: "Please enter the team manager's name.",
-		}, {
-			type: "number",
-			name: "id",
-			message: "Please enter the team manager's employee ID.",
-		}, {
-			//Add team manager
-			type: "email",
-			name: "email",
-			message: "Please enter the team manager's email address.",
-		}, {
-			//Add team manager
-			type: "number",
-			name: "officeNumber",
-			message: "Please enter the team manager's office number.",
-		},
-	]);
-	return new Manager(name, id, email, officeNumber);
-}
+const prompts = {
+	manager: require("./src/prompt/manager"),
+	engineer: require("./src/prompt/engineer"),
+	intern: require("./src/prompt/intern"),
+	next: require("./src/prompt/next"),
+};
 
-//start();
+const start = async () => {
+	try {
+		/** @type {Manager} The project manager. */
+		const manager = await prompts.manager();
+
+		/** @type {Engineer[]} The engineers on the project. */
+		const engineers = [];
+
+		/** @type {Intern[]} The interns on the project. */
+		const interns = [];
+
+		/** @type {boolean} Whether the application should continue prompting the user for team members. */
+		let running = true;
+
+		while (running) {
+			/** @type {string} Enum. Can be: 'engineer', 'intern', 'quit'. */
+			const next = await prompts.next();
+
+			switch (next) {
+				case "engineer":
+					engineers.push(await prompts.engineer());
+					break;
+				case "intern":
+					interns.push(await prompts.intern());
+					break;
+				case "quit":
+				default:
+					const success = await makeTeamPage(manager, engineers, interns);
+					if (success)
+						console.log("Successfully created file!");
+					else
+						console.log("Failed to write file.");
+					running = false;
+					break;
+			}
+		}
+	} catch (error) {
+		console.log(error);
+	}
+	console.log("Goodbye!");
+};
+
+start();
